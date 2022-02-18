@@ -1,0 +1,62 @@
+/* APP COMPONENTS */
+
+.btn {
+  display: block;
+  border: none;
+  cursor: pointer;
+  &__primary {
+    background: $btn-gradient;
+    color: #fff;
+    &--circle {
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%;
+      font-size: 2rem;
+    }
+  }
+}
+
+.progress-bar {
+  display: block;
+  width: 100%;
+}
+
+.search-form {
+  margin-top: 3rem;
+
+  &__input {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 10px rgba(149, 157, 180, 0.25);
+
+    &::placeholder {
+      color: rgb(202, 202, 202);
+    }
+  }
+}
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+
+  &--custom {
+    display: inline-block;
+    position: relative;
+    bottom: -0.15rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1rem;
+    border: 2px solid $primary-color;
+    border-radius: 50%;
+    transition: transform 300ms ease-in-out;
+    cursor: pointer;
+  }
+}
+
+.checkbox:checked + label .checkbox--custom {
+  background: $primary-color;
+  border-color: $primary-color;
+  box-shadow: inset 0 0 0px 2px white;
+}

@@ -1,0 +1,44 @@
+/* APP BASE ELEMENTS VARIABLES, RESETS, UTILITY ETC. */
+
+// VARIABLES
+$primary-color: #1971c2;
+$primary-color-lighter: #d4ebfe;
+$secondary-color: #e03131;
+$secondary-color-lighter: #fab005;
+$background-color: #f5f9fc;
+$font-main-color: #343434;
+$btn-gradient: linear-gradient(180deg, #3472c0 0%, #4e9bee 100%);
+$completed-task: #eeeeee;
+
+// BASIC GLOBAL SETTINGS
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  color: $font-main-color;
+  background-color: $background-color;
+  height: 100vh;
+  overflow: hidden;
+}
+
+input {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* UTILITIES*/
+
+.justify-content-between {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo List Vanilla JavaScript App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/app.js" defer></script>
 </head>
+
 <body>
-    
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="container">
+                <div class="justify-content-between">
+                    <h1 class="app-header__title">Tasks list</h1>
+                    <i class="fa-solid fa-calendar-check app-header__icon"></i>
+                </div>
+                <div class="app-header__info">
+                    <span class="app-header__complete-status">2 / 4 Completed</span>
+                    <progress class="progress-bar" data-progress-bar value="50" max="100"> </progress>
+                </div>
+            </div>
+        </header>
+        <div class="app-content">
+            <div class="container">
+                <form class="search-form">
+                    <input class="search-form__input" type="search" name="search" id="search-input"
+                        placeholder="SEARCH FOR TASK...">
+                </form>
+                <ul class="todo-list">
+                    <li class="todo-list__item">
+                        <input type="checkbox" id="task-1" class="checkbox" />
+                        <label for="task-1" class="todo-list__item-name">
+                            <span class="checkbox--custom"></span>
+                            Task 1
+                        </label>
+                        <span class="todo-list__item-priority todo-list__item-priority--high">H</span>
+                        <button class="todo-list__item-delete-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </li>
+                    <li class="todo-list__item is-complete">
+                        <input type="checkbox" id="task-2" class="checkbox" />
+                        <label for="task-2" class="todo-list__item-name">
+                            <span class="checkbox--custom"></span>
+                            Task 1
+                        </label>
+                        <span class="todo-list__item-priority todo-list__item-priority--high">H</span>
+                        <button class="todo-list__item-delete-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </li>
+                </ul>
+                <button id="add-btn" class="btn btn__primary btn__primary--circle"><i
+                        class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+        <!-- <div class="app-decorative-element"></div> -->
+    </div>
 </body>
+
 </html>
