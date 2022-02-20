@@ -18,8 +18,14 @@ const tasks = [
   {
     id: '2',
     name: 'Task 2',
+    priority: 'medium',
+    complete: false,
+  },
+  {
+    id: '3',
+    name: 'Task 3',
     priority: 'low',
-    complete: true,
+    complete: false,
   },
 ];
 

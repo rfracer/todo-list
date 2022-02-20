@@ -100,10 +100,15 @@
     font-size: 1.2rem;
     line-height: 2rem;
     color: #fff;
-
+    border-radius: 50%;
+    &--low {
+      background-color: #fcc419;
+    }
+    &--medium {
+      background-color: $secondary-color-lighter;
+    }
     &--high {
       background-color: $secondary-color;
-      border-radius: 50%;
     }
   }
 
@@ -130,7 +135,7 @@
 }
 
 #add-open-modal {
-  position: fixed;
+  position: absolute;
   bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);

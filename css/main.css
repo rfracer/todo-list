@@ -365,11 +365,19 @@ input {
   font-size: 1.2rem;
   line-height: 2rem;
   color: #fff;
+  border-radius: 50%;
+}
+
+.todo-list__item-priority--low {
+  background-color: #fcc419;
+}
+
+.todo-list__item-priority--medium {
+  background-color: #f08c00;
 }
 
 .todo-list__item-priority--high {
   background-color: #e03131;
-  border-radius: 50%;
 }
 
 .todo-list__item-delete-btn {
@@ -395,7 +403,7 @@ input {
 }
 
 #add-open-modal {
-  position: fixed;
+  position: absolute;
   bottom: 5rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
