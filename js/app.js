@@ -39,7 +39,7 @@ const addTask = (e) => {
     }
   }
   const newTask = {
-    id: Date.now(),
+    id: Date.now().toString(),
     name: name,
     priority: priority,
     complete: false,
@@ -143,6 +143,7 @@ const renderTasks = (filter = '') => {
 const render = () => {
   renderCompleteTaskCount();
   renderTasks();
+  addDropEvents();
 };
 
 const closeAddModal = () => {
@@ -159,6 +160,58 @@ const clearInputs = () => {
 };
 
 render();
+
+function dragStart(e) {
+  e.dataTransfer.setData('text/plain', this.getAttribute('data-id'));
+}
+
+function dragEnter(e) {
+  //console.log('Event: ', 'dragenter');
+  //this.classList.add('over');
+  //console.log(e.dataTransfer.getData('text/plain'));
+}
+
+function dragLeave() {
+  console.log('Event: ', 'dragleave');
+  //this.classList.remove('over');
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function drop(e) {
+  //e.target.classList.remove('drag-over');
+  const draggedItemId = e.dataTransfer.getData('text/plain');
+  const dropAreaId = e.target.getAttribute('data-id');
+
+  const draggedItemIndex = tasks.findIndex((task) => {
+    return task.id === draggedItemId;
+  });
+
+  const droppedAreaIndex = tasks.findIndex((task) => {
+    return task.id === dropAreaId;
+  });
+  console.log(draggedItemIndex);
+  console.log(droppedAreaIndex);
+
+  const tmp = tasks[draggedItemIndex];
+  tasks[draggedItemIndex] = tasks[droppedAreaIndex];
+  tasks[droppedAreaIndex] = tmp;
+
+  console.log(tasks);
+  render();
+}
+
+function addDropEvents() {
+  const draggables = document.querySelectorAll('.todo-list__item');
+  for (draggable of draggables) {
+    draggable.addEventListener('dragstart', dragStart);
+    draggable.addEventListener('dragenter', dragEnter);
+    draggable.addEventListener('dragover', dragOver);
+    draggable.addEventListener('drop', drop);
+  }
+}
 
 openAddModalBtn.addEventListener('click', openAddModal);
 closeModalBtn.addEventListener('click', closeAddModal);
