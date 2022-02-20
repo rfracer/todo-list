@@ -19,6 +19,7 @@ body {
   background-color: #f5f9fc;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
 input {
@@ -142,7 +143,6 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  display: none;
   padding-top: 7rem;
   -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -405,7 +405,7 @@ input {
 
 #add-open-modal {
   position: absolute;
-  bottom: 5rem;
+  bottom: 10rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
