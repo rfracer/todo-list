@@ -129,59 +129,9 @@
   }
 }
 
-.app-content {
-  .btn {
-    position: fixed;
-    bottom: 5rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+#add-open-modal {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-//<div class="btn btn__primary btn__primary--circle"><i class="fa-solid fa-plus"></i></div>
-
-//<ul class="todo-list">
-//                 <li class="todo-list__item">
-//                     <input type="checkbox" id="task-1" class="todo-list__item-checkbox" />
-//                     <label for="task-1" class="todo-list__item-name">
-//                         <span class="todo-list__checkbox--custom"></span>
-//                         Task 1
-//                     </label>
-//                     <span class="todo-list__item-priority">H</span>
-//                     <button class="todo-list__item-delete"><i class="fa-solid fa-xmark"></i></button>
-//                 </li>
-//             </ul>
-// <body>
-//     <div class="app-wrapper">
-//         <header class="app-header">
-//             <div class="container">
-//                 <div class="app-header__wrapper">
-//                     <h1 class="app-header__title">Tasks list</h1>
-//                     <i class="fa-solid fa-calendar-check app-header__icon"></i>
-//                 </div>
-//                 <div class="app-header__info">
-//                     <span class="app-header__info__completed-status">2/4 Completed</span>
-//                 </div>
-//             </div>
-//         </header>
-//         <div class="app-content">
-//             <form class="search">
-//                 <input type="search" name="search" id="search__input">
-//             </form>
-//             <ul class="todo-list">
-//                 <li class="todo-list__item">
-//                     <input type="checkbox" id="task-1" class="todo-list__item-checkbox" />
-//                     <label for="task-1" class="todo-list__item-name">
-//                         <span class="todo-list__checkbox--custom"></span>
-//                         Task 1
-//                     </label>
-//                     <span class="todo-list__item-priority">H</span>
-//                     <button class="todo-list__item-delete"><i class="fa-solid fa-xmark"></i></button>
-//                 </li>
-//             </ul>
-//             <div class="btn btn__primary btn__primary--circle"><i class="fa-solid fa-plus"></i></div>
-//         </div>
-//     </div>
-// </body>
-
-// </html>

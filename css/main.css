@@ -47,15 +47,23 @@ input {
   display: block;
   border: none;
   cursor: pointer;
+  -webkit-box-shadow: 0px 8px 10px rgba(149, 157, 180, 0.25);
+          box-shadow: 0px 8px 10px rgba(149, 157, 180, 0.25);
 }
 
-.btn__primary {
+.btn--primary {
   background: -webkit-gradient(linear, left top, left bottom, from(#3472c0), to(#4e9bee));
   background: linear-gradient(180deg, #3472c0 0%, #4e9bee 100%);
   color: #fff;
+  padding: 1.1rem 3rem;
+  width: 50%;
+  border-radius: 10px;
 }
 
-.btn__primary--circle {
+.btn--primary-circle {
+  background: -webkit-gradient(linear, left top, left bottom, from(#3472c0), to(#4e9bee));
+  background: linear-gradient(180deg, #3472c0 0%, #4e9bee 100%);
+  color: #fff;
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
@@ -71,7 +79,7 @@ input {
   margin-top: 3rem;
 }
 
-.search-form__input {
+.input {
   width: 100%;
   padding: 10px 20px;
   border: none;
@@ -80,19 +88,19 @@ input {
           box-shadow: 0px 8px 10px rgba(149, 157, 180, 0.25);
 }
 
-.search-form__input::-webkit-input-placeholder {
+.input::-webkit-input-placeholder {
   color: #cacaca;
 }
 
-.search-form__input:-ms-input-placeholder {
+.input:-ms-input-placeholder {
   color: #cacaca;
 }
 
-.search-form__input::-ms-input-placeholder {
+.input::-ms-input-placeholder {
   color: #cacaca;
 }
 
-.search-form__input::placeholder {
+.input::placeholder {
   color: #cacaca;
 }
 
@@ -118,6 +126,122 @@ input {
 }
 
 .checkbox:checked + label .checkbox--custom {
+  background: #1971c2;
+  border-color: #1971c2;
+  -webkit-box-shadow: inset 0 0 0px 2px white;
+          box-shadow: inset 0 0 0px 2px white;
+}
+
+/* ADD TASK MODAL */
+.modal {
+  position: fixed;
+  background-color: #f5f9fc;
+  z-index: 100;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 7rem;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  -webkit-transform: translateX(-120%);
+          transform: translateX(-120%);
+  -webkit-transition: 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+  transition: 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.modal.visible {
+  display: block;
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+.modal .modal__content {
+  margin-top: 6rem;
+}
+
+.modal .modal__actions {
+  margin-top: 7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal__close {
+  display: inline-block;
+  margin-left: auto;
+  font-size: 4rem;
+  color: #1971c2;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@-webkit-keyframes fade-slide-in {
+  from {
+    -webkit-transform: translateX(-500rem);
+            transform: translateX(-500rem);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes fade-slide-in {
+  from {
+    -webkit-transform: translateX(-500rem);
+            transform: translateX(-500rem);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+.radio-select {
+  margin-top: 5rem;
+}
+
+.radio-select__heading {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.radio-select__item {
+  margin-bottom: 0.9rem;
+}
+
+.radio-select__label {
+  margin-left: 0.5rem;
+}
+
+.radio-select__input {
+  opacity: 0;
+  position: absolute;
+}
+
+.radio-select__input--custom {
+  display: inline-block;
+  position: relative;
+  bottom: -0.15rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 1rem;
+  border: 2px solid #1971c2;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 300ms ease-in-out;
+  transition: -webkit-transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.radio-select__input:checked + label .radio-select__input--custom {
   background: #1971c2;
   border-color: #1971c2;
   -webkit-box-shadow: inset 0 0 0px 2px white;
@@ -270,7 +394,7 @@ input {
   border-radius: 5px;
 }
 
-.app-content .btn {
+#add-open-modal {
   position: fixed;
   bottom: 5rem;
   left: 50%;
