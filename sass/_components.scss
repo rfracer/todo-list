@@ -64,6 +64,18 @@
 // SEARCH FORM
 .search-form {
   margin-top: 3rem;
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3rem;
+    left: 0px;
+    transform: translateX(10%);
+    width: 80%;
+    height: 3px;
+    background-color: $primary-color;
+    border-radius: 5px;
+  }
 }
 
 .input-text {
@@ -102,9 +114,29 @@
 // TO DO LIST COMPONENT: LIST, ITEMS, PRIORITY STATUS, DELETE BUTTON
 .todo-list {
   position: relative;
-  margin-top: 4rem;
-  padding-top: 3rem;
+  max-height: 30rem;
+  margin-top: 7rem;
+  padding: 0 0.3rem 3rem 0.3rem;
   list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  //TO DO LIST LIST AREA - SCROLL
+  @include tablet {
+    max-height: 62rem;
+  }
+
+  @include desktop {
+    max-height: 20rem;
+  }
+
+  @include big-desktop {
+    max-height: 28rem;
+  }
+
+  @include very-big-desktop {
+    max-height: 40rem;
+  }
 
   &__item {
     position: relative;
@@ -120,6 +152,7 @@
 
     @include tablet {
       padding: 1.2rem 2rem;
+      margin-bottom: 1rem;
     }
 
     @include desktop {
@@ -211,18 +244,14 @@
     border: none;
     cursor: pointer;
   }
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 3px;
-    background-color: $primary-color;
-    border-radius: 5px;
-  }
+.over {
+  border: 1px dashed $secondary-color;
+}
+
+.dragged {
+  opacity: 0.5;
 }
 
 // MODAL - ADD TASK

@@ -3,6 +3,7 @@ $breakpoints: (
   'tablet': 768px,
   'laptop': 1200px,
   'large-desktop': 1600px,
+  'very-large-desktop': 2000px,
 );
 
 @mixin phone {
@@ -22,6 +23,11 @@ $breakpoints: (
 }
 @mixin big-desktop {
   @media (min-width: map-get($breakpoints, 'large-desktop')) {
+    @content;
+  }
+}
+@mixin very-big-desktop {
+  @media (min-width: map-get($breakpoints, 'very-large-desktop')) {
     @content;
   }
 }

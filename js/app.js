@@ -5,14 +5,9 @@ const closeModalBtn = document.getElementById('modal-close-btn');
 
 const searchInput = document.getElementById('search-input');
 const tasksContainer = document.getElementById('todo-list');
-const taskTemplate = document.getElementById('template-task');
-const taskCount = document.getElementById('complete-count');
-const taskCountProgressBar = document.querySelector('[data-progress-bar]');
 
 const addTaskForm = document.getElementById('add-form');
-const addTaskBtn = document.getElementById('add-btn');
-const addTaskInput = document.getElementById('add-task-name');
-const addTaskPriority = document.querySelectorAll('input[name="priority"]');
+const addTaskNameInput = document.getElementById('add-task-name');
 
 const LOCAL_STORAGE_KEY = 'tasks';
 
@@ -20,14 +15,14 @@ const tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? [];
 
 const addTask = (e) => {
   e.preventDefault();
-  const name = addTaskInput.value;
-  if (name === '') {
-    // showMessage('Empty task error', 'error');
-    return;
-  }
+  const name = addTaskNameInput.value;
+
+  if (name === '') return;
+
+  const addTaskPriority = document.querySelectorAll('input[name="priority"]');
   let priority;
 
-  for (var i = 0; i < addTaskPriority.length; i++) {
+  for (let i = 0; i < addTaskPriority.length; i++) {
     if (addTaskPriority[i].checked) {
       priority = addTaskPriority[i].value;
       break;
@@ -39,7 +34,9 @@ const addTask = (e) => {
     priority: priority,
     complete: false,
   };
+
   tasks.push(newTask);
+
   closeAddModal();
   clearInputs();
   render();
@@ -61,16 +58,19 @@ const deleteTask = (e) => {
 };
 
 const renderCompleteTaskCount = () => {
+  const taskCount = document.getElementById('complete-count');
+  const taskCountProgressBar = document.querySelector('[data-progress-bar]');
+
   const totalTasks = tasks.length;
-  const completedTasks = tasks.filter((task) => {
+  const completedTasksCount = tasks.filter((task) => {
     return task.complete === true;
   }).length;
   if (totalTasks) {
-    taskCount.innerHTML = `${completedTasks} / ${totalTasks} Completed`;
-    taskCountProgressBar.value = completedTasks;
+    taskCount.innerHTML = `${completedTasksCount} / ${totalTasks} Completed`;
+    taskCountProgressBar.value = completedTasksCount;
     taskCountProgressBar.max = totalTasks;
   } else {
-    taskCount.innerHTML = `No tasks`;
+    taskCount.innerHTML = 'No tasks';
     taskCountProgressBar.value = 0;
   }
 };
@@ -90,12 +90,14 @@ const taskCheckboxHandler = (e) => {
   saveToStorage();
 };
 
-const filterTask = (e) => {
+const filterTask = () => {
   const searchValue = searchInput.value;
   renderTasks(searchValue);
 };
 
 const renderTasks = (filter = '') => {
+  const taskTemplate = document.getElementById('template-task');
+
   tasksContainer.innerHTML = '';
   const filteredTasks = !filter
     ? tasks
@@ -105,10 +107,12 @@ const renderTasks = (filter = '') => {
 
   for (const task of filteredTasks) {
     const taskElement = document.importNode(taskTemplate.content, true);
-    const taskListItem = taskElement.firstElementChild; //? list item li
+    const taskListItem = taskElement.firstElementChild;
     const checkboxInput = taskElement.querySelector('input');
+
     taskListItem.dataset.id = task.id;
     checkboxInput.id = task.id;
+
     if (task.complete) {
       checkboxInput.checked = task.complete;
       taskListItem.classList.add('is-complete');
@@ -116,6 +120,7 @@ const renderTasks = (filter = '') => {
     const label = taskElement.querySelector('label');
     label.htmlFor = task.id;
     const priority = taskElement.querySelector('.todo-list__item-priority');
+
     switch (task.priority) {
       case 'low':
         priority.textContent = 'L';
@@ -139,18 +144,14 @@ const saveToStorage = () => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
 };
 
-const render = () => {
-  renderCompleteTaskCount();
-  renderTasks();
-  addDropEvents();
-};
-
 const closeAddModal = () => {
   addModal.classList.remove('visible');
   const mediaQuery = window.matchMedia('(min-width: 1200px)');
   if (mediaQuery.matches) {
     appWrapper.classList.remove('backdrop');
   }
+  clearInputs();
+  render();
 };
 
 const openAddModal = () => {
@@ -162,24 +163,26 @@ const openAddModal = () => {
 };
 
 const clearInputs = () => {
-  addTaskInput.value = '';
+  addTaskNameInput.value = '';
   searchInput.value = '';
 };
 
+/**
+ * DRAG AND DROP FUNCIONALITY ON TASKS LIST ITEMS - DRAG AND DROP API
+ * ALLOW MOVING ELEMENTS AND SWAP PLACES
+ */
+
 function dragStart(e) {
   e.dataTransfer.setData('text/plain', this.getAttribute('data-id'));
-  event.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.effectAllowed = 'move';
 }
 
-function dragEnter(e) {
-  //console.log('Event: ', 'dragenter');
-  //this.classList.add('over');
-  //console.log(e.dataTransfer.getData('text/plain'));
+function dragEnter() {
+  this.classList.add('over');
 }
 
 function dragLeave() {
-  console.log('Event: ', 'dragleave');
-  //this.classList.remove('over');
+  this.classList.remove('over');
 }
 
 function dragOver(e) {
@@ -189,10 +192,6 @@ function dragOver(e) {
 function drop(e) {
   const draggedItemId = e.dataTransfer.getData('text/plain');
   const dropAreaId = e.target.closest('li').getAttribute('data-id');
-
-  console.log(dropAreaId);
-  console.log(draggedItemId);
-
   const draggedItemIndex = tasks.findIndex((task) => {
     return task.id === draggedItemId;
   });
@@ -200,9 +199,6 @@ function drop(e) {
   const droppedAreaIndex = tasks.findIndex((task) => {
     return task.id === dropAreaId;
   });
-  console.log(draggedItemIndex);
-  console.log(droppedAreaIndex);
-
   const tmp = tasks[draggedItemIndex];
   tasks[draggedItemIndex] = tasks[droppedAreaIndex];
   tasks[droppedAreaIndex] = tmp;
@@ -213,13 +209,27 @@ function drop(e) {
 
 function addDropEvents() {
   const draggables = document.querySelectorAll('.todo-list__item');
-  for (draggable of draggables) {
+  for (const draggable of draggables) {
     draggable.addEventListener('dragstart', dragStart);
     draggable.addEventListener('dragenter', dragEnter);
     draggable.addEventListener('dragover', dragOver);
+    draggable.addEventListener('dragleave', dragLeave);
     draggable.addEventListener('drop', drop);
   }
 }
+
+/**
+ * RENDER THE MOST IMPORTANT PARTS:
+ *  - DISPLAY COMPLETE TASK COUNT IN DOM AND CHANGE PROGRESS BAR VALUE
+ *  - RENDER ALL THE LIST TASKS
+ *  - ADD ALL NEEDED EVENTS TO ENABLE DRAG AND DROP FUNCIONALITY ON LIST ITEMS
+ */
+
+const render = () => {
+  renderCompleteTaskCount();
+  renderTasks();
+  addDropEvents();
+};
 
 render();
 
