@@ -1,6 +1,8 @@
 # Tasks List App
 Basic Vanilla JavaScript Tasks List App
 
+Live link: [TASKS LIST APP](https://rfracer.github.io/todo-list/).
+
 ![image](https://user-images.githubusercontent.com/22677833/155019943-d51aaa83-6900-439a-a0a9-319fa55862c3.png)
 
 ## How It Works
