@@ -93,6 +93,7 @@ const taskCheckboxHandler = (e) => {
 const filterTask = () => {
   const searchValue = searchInput.value;
   renderTasks(searchValue);
+  addDropEvents();
 };
 
 const renderTasks = (filter = '') => {
@@ -222,7 +223,6 @@ function addDropEvents() {
  * RENDER THE MOST IMPORTANT PARTS:
  *  - DISPLAY COMPLETE TASK COUNT IN DOM AND CHANGE PROGRESS BAR VALUE
  *  - RENDER ALL THE LIST TASKS
- *  - ADD ALL NEEDED EVENTS TO ENABLE DRAG AND DROP FUNCIONALITY ON LIST ITEMS
  */
 
 const render = () => {
