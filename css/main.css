@@ -330,39 +330,12 @@ input::placeholder {
 }
 
 .todo-list__item.is-complete {
-  -webkit-filter: brightness(0.95);
-          filter: brightness(0.95);
-}
-
-.todo-list__item.is-complete label::after {
-  content: '';
-  position: absolute;
-  left: 5.5rem;
-  top: 50%;
-  -webkit-transform: translateY(50%);
-          transform: translateY(50%);
-  width: 65%;
-  height: 0.2rem;
-  background: #9b9b9b;
-  -webkit-transform: scaleX(0);
-          transform: scaleX(0);
-  -webkit-transform-origin: right;
-          transform-origin: right;
-  -webkit-transition: -webkit-transform 150ms ease-in-out;
-  transition: -webkit-transform 150ms ease-in-out;
-  transition: transform 150ms ease-in-out;
-  transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
-}
-
-.todo-list__item.is-complete .checkbox:checked + label::after {
-  -webkit-transform: scaleX(1);
-          transform: scaleX(1);
-  -webkit-transform-origin: left;
-          transform-origin: left;
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
 }
 
 .todo-list__item.is-complete .checkbox:checked + label {
-  color: #868686;
+  color: #797979;
 }
 
 .todo-list__item-name {

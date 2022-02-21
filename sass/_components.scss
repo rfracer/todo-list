@@ -168,28 +168,9 @@
     }
 
     &.is-complete {
-      filter: brightness(0.95);
-      label::after {
-        content: '';
-        position: absolute;
-        left: 5.5rem;
-        top: 50%;
-        transform: translateY(50%);
-        width: 65%;
-        height: 0.2rem;
-        background: #9b9b9b;
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 150ms ease-in-out;
-      }
-
-      & .checkbox:checked + label::after {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
-
+      filter: brightness(0.9);
       & .checkbox:checked + label {
-        color: #868686;
+        color: #797979;
       }
     }
   }
