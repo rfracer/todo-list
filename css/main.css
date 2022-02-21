@@ -261,7 +261,7 @@ input::placeholder {
   margin-top: 7rem;
   padding: 0 0.3rem 3rem 0.3rem;
   list-style: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
