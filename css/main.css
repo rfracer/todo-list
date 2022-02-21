@@ -257,7 +257,7 @@ input::placeholder {
 
 .todo-list {
   position: relative;
-  max-height: 30rem;
+  max-height: 24rem;
   margin-top: 7rem;
   padding: 0 0.3rem 3rem 0.3rem;
   list-style: none;
@@ -297,7 +297,7 @@ input::placeholder {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.9rem 2rem;
   margin-bottom: 2rem;
   border: 1px solid transparent;
   border-radius: 1rem;
