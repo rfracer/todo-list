@@ -1,3 +1,4 @@
+const appWrapper = document.querySelector('[data-app-wrapper]');
 const addModal = document.getElementById('add-modal');
 const openAddModalBtn = document.getElementById('add-open-modal');
 const closeModalBtn = document.getElementById('modal-close-btn');
@@ -13,21 +14,9 @@ const addTaskBtn = document.getElementById('add-btn');
 const addTaskInput = document.getElementById('add-task-name');
 const addTaskPriority = document.querySelectorAll('input[name="priority"]');
 
-const tasks = [
-  { id: '1', name: 'Task 1', priority: 'high', complete: false },
-  {
-    id: '2',
-    name: 'Task 2',
-    priority: 'medium',
-    complete: false,
-  },
-  {
-    id: '3',
-    name: 'Task 3',
-    priority: 'low',
-    complete: false,
-  },
-];
+const LOCAL_STORAGE_KEY = 'tasks';
+
+const tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? [];
 
 const addTask = (e) => {
   e.preventDefault();
@@ -54,6 +43,7 @@ const addTask = (e) => {
   closeAddModal();
   clearInputs();
   render();
+  saveToStorage();
 };
 
 const deleteTask = (e) => {
@@ -67,9 +57,7 @@ const deleteTask = (e) => {
   });
   tasks.splice(index, 1);
   render();
-  console.log(tasks);
-
-  // if (!tasks.length) renderCompleteTaskCount();
+  saveToStorage();
 };
 
 const renderCompleteTaskCount = () => {
@@ -99,6 +87,7 @@ const taskCheckboxHandler = (e) => {
   tasks[index].complete = !tasks[index].complete;
 
   renderCompleteTaskCount();
+  saveToStorage();
 };
 
 const filterTask = (e) => {
@@ -146,6 +135,10 @@ const renderTasks = (filter = '') => {
   }
 };
 
+const saveToStorage = () => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+};
+
 const render = () => {
   renderCompleteTaskCount();
   renderTasks();
@@ -154,10 +147,18 @@ const render = () => {
 
 const closeAddModal = () => {
   addModal.classList.remove('visible');
+  const mediaQuery = window.matchMedia('(min-width: 1200px)');
+  if (mediaQuery.matches) {
+    appWrapper.classList.remove('backdrop');
+  }
 };
 
 const openAddModal = () => {
   addModal.classList.add('visible');
+  const mediaQuery = window.matchMedia('(min-width: 1200px)');
+  if (mediaQuery.matches) {
+    appWrapper.classList.add('backdrop');
+  }
 };
 
 const clearInputs = () => {
@@ -165,10 +166,9 @@ const clearInputs = () => {
   searchInput.value = '';
 };
 
-render();
-
 function dragStart(e) {
   e.dataTransfer.setData('text/plain', this.getAttribute('data-id'));
+  event.dataTransfer.effectAllowed = 'move';
 }
 
 function dragEnter(e) {
@@ -187,9 +187,11 @@ function dragOver(e) {
 }
 
 function drop(e) {
-  //e.target.classList.remove('drag-over');
   const draggedItemId = e.dataTransfer.getData('text/plain');
-  const dropAreaId = e.target.getAttribute('data-id');
+  const dropAreaId = e.target.closest('li').getAttribute('data-id');
+
+  console.log(dropAreaId);
+  console.log(draggedItemId);
 
   const draggedItemIndex = tasks.findIndex((task) => {
     return task.id === draggedItemId;
@@ -205,8 +207,8 @@ function drop(e) {
   tasks[draggedItemIndex] = tasks[droppedAreaIndex];
   tasks[droppedAreaIndex] = tmp;
 
-  console.log(tasks);
   render();
+  saveToStorage();
 }
 
 function addDropEvents() {
@@ -218,6 +220,8 @@ function addDropEvents() {
     draggable.addEventListener('drop', drop);
   }
 }
+
+render();
 
 openAddModalBtn.addEventListener('click', openAddModal);
 closeModalBtn.addEventListener('click', closeAddModal);

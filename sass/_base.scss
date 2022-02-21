@@ -1,5 +1,3 @@
-/* APP BASE ELEMENTS VARIABLES, RESETS, UTILITY ETC. */
-
 // VARIABLES
 $primary-color: #1971c2;
 $primary-color-lighter: #d4ebfe;
@@ -7,10 +5,13 @@ $secondary-color: #e03131;
 $secondary-color-lighter: #f08c00;
 $background-color: #f5f9fc;
 $font-main-color: #343434;
-$btn-gradient: linear-gradient(180deg, #3472c0 0%, #4e9bee 100%);
+$btn-primary: #1971c2;
+$btn-secondary: #327cc2;
 $completed-task: #eeeeee;
+$backdrop: #c9c9c9;
+$modal-desktop-background: #f8f9fa;
 
-// BASIC GLOBAL SETTINGS
+// BASIC GLOBAL SETTINGS, RESETS
 *,
 *::before,
 *::after {
@@ -19,24 +20,39 @@ $completed-task: #eeeeee;
   padding: 0;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.6rem;
   color: $font-main-color;
   background-color: $background-color;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+html {
+  height: 100%;
+  font-size: 62.5%;
 }
 
 input {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  &::placeholder {
+    color: rgb(185, 185, 185);
+  }
+  @include tablet {
+    font-size: 1.8rem;
+  }
+  @include desktop {
+    font-size: 1.6rem;
+  }
 }
 
 /* UTILITIES*/
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 90%;
+}
 
 .justify-content-between {
   display: flex;

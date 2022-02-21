@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List Vanilla JavaScript App</title>
+    <title>Tasks List Vanilla JavaScript App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="app-wrapper">
+    <div class="app-wrapper" data-app-wrapper>
         <header class="app-header">
             <div class="container">
                 <div class="justify-content-between">
@@ -33,61 +33,65 @@
         <div class="app-content">
             <div class="container">
                 <form class="search-form">
-                    <input class="input" type="search" name="search" id="search-input" placeholder="SEARCH FOR TASK...">
+                    <input class="input-text" type="search" name="search" id="search-input"
+                        placeholder="SEARCH FOR TASK...">
                 </form>
                 <ul id="todo-list" class="todo-list">
                 </ul>
             </div>
-            <button id="add-open-modal" class="btn btn--primary-circle"><i class="fa-solid fa-plus"></i></button>
-            <div class="modal" id="add-modal">
-                <div class="container">
-                    <div class="justify-content-between">
-                        <h2 class="modal__title app-header__title">Add Task</h2>
-                        <button id="modal-close-btn" class="modal__close"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    <div class="modal__content">
-                        <form id="add-form">
-                            <input class="input" type="text" name="name" id="add-task-name" placeholder="TASK NAME" />
-                            <div class="radio-select">
-                                <h3 class="radio-select__heading">SELECT PRIORITY</h3>
-                                <div class="radio-select__item">
-                                    <input class="radio-select__input" type="radio" name="priority" value="high"
-                                        id="priority-high">
-                                    <label class="radio-select__label" for="priority-high"><span
-                                            class="radio-select__input--custom"></span>HIGH</label>
-                                </div>
-                                <div class="radio-select__item">
-                                    <input class="radio-select__input" type="radio" name="priority" value="medium"
-                                        id="priority-medium">
-                                    <label class="radio-select__label" for="priority-medium"><span
-                                            class="radio-select__input--custom"></span>MEDIUM</label>
-                                </div>
-                                <div class="radio-select__item">
-                                    <input class="radio-select__input" type="radio" name="priority" value="low"
-                                        id="priority-low">
-                                    <label class="radio-select__label" for="priority-low"><span
-                                            class="radio-select__input--custom"></span>LOW</label>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="modal__actions">
-                        <input type="submit" id="add-btn" class="btn btn--primary" value="ADD">
-                    </div>
-                    </form>
-                </div>
-            </div>
         </div>
-        <template id="template-task">
-            <li class="todo-list__item" draggable="true">
-                <input type="checkbox" class="checkbox" />
-                <label for="" class="todo-list__item-name">
-                    <span class="checkbox--custom"></span>
-                </label>
-                <span class="todo-list__item-priority"></span>
-                <button class="todo-list__item-delete-btn"><i class="fa-solid fa-xmark close-btn-icon"></i></button>
-            </li>
-        </template>
+        <button id="add-open-modal" class="btn btn--primary-circle"><i class="fa-solid fa-plus"></i></button>
+
     </div>
+    <div class="modal" id="add-modal">
+        <div class="container">
+            <div class="justify-content-between">
+                <h2 class="modal__title app-header__title">Add Task</h2>
+                <button id="modal-close-btn" class="modal__close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal__content">
+                <form id="add-form">
+                    <h3 class="modal__subheading">TASK NAME</h3>
+                    <input class="input-text" type="text" name="name" id="add-task-name"
+                        placeholder="WRITE NAME HERE ..." required />
+                    <div class="radio-select">
+                        <h3 class="modal__subheading">SELECT PRIORITY</h3>
+                        <div class="radio-select__item">
+                            <input class="radio-select__input" type="radio" name="priority" value="high"
+                                id="priority-high">
+                            <label class="radio-select__label" for="priority-high"><span
+                                    class="radio-select__input--custom"></span>HIGH</label>
+                        </div>
+                        <div class="radio-select__item">
+                            <input class="radio-select__input" type="radio" name="priority" value="medium"
+                                id="priority-medium">
+                            <label class="radio-select__label" for="priority-medium"><span
+                                    class="radio-select__input--custom"></span>MEDIUM</label>
+                        </div>
+                        <div class="radio-select__item">
+                            <input class="radio-select__input" type="radio" name="priority" value="low"
+                                id="priority-low">
+                            <label class="radio-select__label" for="priority-low"><span
+                                    class="radio-select__input--custom"></span>LOW</label>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal__actions">
+                <input type="submit" id="add-btn" class="btn btn--primary" value="ADD">
+            </div>
+            </form>
+        </div>
+    </div>
+    <template id="template-task">
+        <li class="todo-list__item" draggable="true">
+            <input type="checkbox" class="checkbox" />
+            <label for="" class="todo-list__item-name">
+                <span class="checkbox--custom"></span>
+            </label>
+            <span class="todo-list__item-priority"></span>
+            <button class="todo-list__item-delete-btn"><i class="fa-solid fa-xmark close-btn-icon"></i></button>
+        </li>
+    </template>
 </body>
 
 </html>
