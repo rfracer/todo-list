@@ -39,8 +39,52 @@ const addTask = (e) => {
 
   closeAddModal();
   clearInputs();
-  render();
+  createElement(newTask);
+
   saveToStorage();
+};
+
+const createElement = (task) => {
+  const taskTemplate = document.getElementById('template-task');
+  const taskElement = document.importNode(taskTemplate.content, true);
+  const taskListItem = taskElement.firstElementChild;
+  const checkboxInput = taskElement.querySelector('input');
+
+  taskListItem.dataset.id = task.id;
+  checkboxInput.id = task.id;
+
+  if (task.complete) {
+    checkboxInput.checked = task.complete;
+    taskListItem.classList.add('is-complete');
+  }
+  const label = taskElement.querySelector('label');
+  label.htmlFor = task.id;
+  const priority = taskElement.querySelector('.todo-list__item-priority');
+
+  switch (task.priority) {
+    case 'low':
+      priority.textContent = 'L';
+      priority.classList.add('todo-list__item-priority--low');
+      break;
+    case 'medium':
+      priority.textContent = 'M';
+      priority.classList.add('todo-list__item-priority--medium');
+      break;
+    case 'high':
+      priority.textContent = 'H';
+      priority.classList.add('todo-list__item-priority--high');
+      break;
+  }
+  label.append(task.name);
+  tasksContainer.appendChild(taskElement);
+
+  addDropEvent(taskListItem);
+  renderCompleteTaskCount();
+};
+
+const deleteElement = (item) => {
+  item.remove();
+  renderCompleteTaskCount();
 };
 
 const deleteTask = (e) => {
@@ -53,7 +97,7 @@ const deleteTask = (e) => {
     return task.id === itemId;
   });
   tasks.splice(index, 1);
-  render();
+  deleteElement(item);
   saveToStorage();
 };
 
@@ -76,6 +120,7 @@ const renderCompleteTaskCount = () => {
 };
 
 const taskCheckboxHandler = (e) => {
+  //ok
   if (e.target.tagName.toLowerCase() != 'input') return;
   const item = e.target.closest('.todo-list__item');
   const itemId = item.dataset.id;
@@ -91,15 +136,15 @@ const taskCheckboxHandler = (e) => {
 };
 
 const filterTask = () => {
+  //ok
   const searchValue = searchInput.value;
   renderTasks(searchValue);
   addDropEvents();
 };
 
 const renderTasks = (filter = '') => {
-  const taskTemplate = document.getElementById('template-task');
-
   tasksContainer.innerHTML = '';
+
   const filteredTasks = !filter
     ? tasks
     : tasks.filter((task) => {
@@ -107,37 +152,7 @@ const renderTasks = (filter = '') => {
       });
 
   for (const task of filteredTasks) {
-    const taskElement = document.importNode(taskTemplate.content, true);
-    const taskListItem = taskElement.firstElementChild;
-    const checkboxInput = taskElement.querySelector('input');
-
-    taskListItem.dataset.id = task.id;
-    checkboxInput.id = task.id;
-
-    if (task.complete) {
-      checkboxInput.checked = task.complete;
-      taskListItem.classList.add('is-complete');
-    }
-    const label = taskElement.querySelector('label');
-    label.htmlFor = task.id;
-    const priority = taskElement.querySelector('.todo-list__item-priority');
-
-    switch (task.priority) {
-      case 'low':
-        priority.textContent = 'L';
-        priority.classList.add('todo-list__item-priority--low');
-        break;
-      case 'medium':
-        priority.textContent = 'M';
-        priority.classList.add('todo-list__item-priority--medium');
-        break;
-      case 'high':
-        priority.textContent = 'H';
-        priority.classList.add('todo-list__item-priority--high');
-        break;
-    }
-    label.append(task.name);
-    tasksContainer.appendChild(taskElement);
+    createElement(task);
   }
 };
 
@@ -152,7 +167,6 @@ const closeAddModal = () => {
     appWrapper.classList.remove('backdrop');
   }
   clearInputs();
-  render();
 };
 
 const openAddModal = () => {
@@ -208,15 +222,12 @@ function drop(e) {
   saveToStorage();
 }
 
-function addDropEvents() {
-  const draggables = document.querySelectorAll('.todo-list__item');
-  for (const draggable of draggables) {
-    draggable.addEventListener('dragstart', dragStart);
-    draggable.addEventListener('dragenter', dragEnter);
-    draggable.addEventListener('dragover', dragOver);
-    draggable.addEventListener('dragleave', dragLeave);
-    draggable.addEventListener('drop', drop);
-  }
+function addDropEvent(listItem) {
+  listItem.addEventListener('dragstart', dragStart);
+  listItem.addEventListener('dragenter', dragEnter);
+  listItem.addEventListener('dragover', dragOver);
+  listItem.addEventListener('dragleave', dragLeave);
+  listItem.addEventListener('drop', drop);
 }
 
 /**
@@ -228,7 +239,6 @@ function addDropEvents() {
 const render = () => {
   renderCompleteTaskCount();
   renderTasks();
-  addDropEvents();
 };
 
 render();
