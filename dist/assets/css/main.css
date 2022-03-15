@@ -92,7 +92,7 @@ input::placeholder {
   left: 0;
   width: 100%;
   height: 1rem;
-  background-image: url("../img/underline.svg");
+  background-image: url("../../img/underline.svg");
   background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;

@@ -4,7 +4,10 @@
   "description": "Basic Vanilla JavaScript Tasks List App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "webpack-dev-server",
+    "build": "webpack",
+    "build:prod": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +18,21 @@
   "bugs": {
     "url": "https://github.com/rfracer/todo-list/issues"
   },
-  "homepage": "https://github.com/rfracer/todo-list#readme"
-  
+  "homepage": "https://github.com/rfracer/todo-list#readme",
+  "browserslist": "> 0.5%",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "core-js": "^3.21.1"
+  }
 }
