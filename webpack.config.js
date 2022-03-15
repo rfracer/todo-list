@@ -9,16 +9,16 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist/assets/scripts'),
-    publicPath: '/dist/assets/scripts/',
+    publicPath: '/assets/scripts/',
   },
   devtool: 'source-map',
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    devMiddleware: {
-      writeToDisk: true,
-    },
+    // devMiddleware: {
+    //   writeToDisk: true,
+    // },
   },
   module: {
     rules: [

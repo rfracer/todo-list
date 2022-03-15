@@ -8,13 +8,10 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist', 'assets', 'scripts'),
-    publicPath: 'assets/scripts/',
+    path: path.resolve(__dirname, 'dist/assets/scripts'),
+    publicPath: '/assets/scripts/',
   },
   devtool: 'cheap-source-map',
-  devServer: {
-    contentBase: './dist',
-  },
   module: {
     rules: [
       {
